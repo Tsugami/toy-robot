@@ -1,13 +1,13 @@
-import { useState } from 'react';
+import { useState, createContext, useContext } from 'react';
 
-enum Direction {
-  NORTH,
-  EAST,
-  SOUTH,
-  WEST,
+export enum Direction {
+  NORTH = 'NORTH',
+  EAST = 'EAST',
+  SOUTH = 'SOUTH',
+  WEST = 'WEST',
 }
 
-interface DataRobot {
+export interface DataRobot {
   x: number;
   y: number;
   direction: Direction;
@@ -33,8 +33,22 @@ interface IUseToyRobotConfig {
   onError: (error: IUseToyRobotError) => void;
 }
 
-export const useToyRobot = (config: IUseToyRobotConfig): IUseToyRobot => {
-  const [data, setData] = useState<DataRobot | null>(null);
+interface IUseToyRobotProviderProps {
+  children: React.ReactNode;
+  config: IUseToyRobotConfig;
+}
+
+const ToyRobotContext = createContext<IUseToyRobot>({} as IUseToyRobot);
+
+export const ToyRobotProvider = ({ config, children }: IUseToyRobotProviderProps): JSX.Element => {
+  const [data, setData] = useState<DataRobot | null>(
+    // TEMPORATIO
+    {
+      direction: Direction.NORTH,
+      x: 0,
+      y: 0,
+    },
+  );
 
   const turnLeft = () => {
     if (!data) {
@@ -113,11 +127,18 @@ export const useToyRobot = (config: IUseToyRobotConfig): IUseToyRobot => {
     setData({ x, y, direction });
   };
 
-  return {
-    turnLeft,
-    turnRight,
-    moveForward,
-    place,
-    data,
-  };
+  return (
+    <ToyRobotContext.Provider
+      value={{
+        turnLeft,
+        turnRight,
+        moveForward,
+        place,
+        data,
+      }}>
+      {children}
+    </ToyRobotContext.Provider>
+  );
 };
+
+export const useToyRobot = () => useContext(ToyRobotContext);
