@@ -11,7 +11,15 @@ export interface DataRobot {
   x: number;
   y: number;
   direction: Direction;
+  rotate: number;
 }
+
+const directionRotate: Record<Direction, number> = {
+  [Direction.NORTH]: 180,
+  [Direction.EAST]: 90,
+  [Direction.WEST]: 270,
+  [Direction.SOUTH]: 0,
+};
 
 interface IUseToyRobot {
   areaWidth: number;
@@ -60,7 +68,9 @@ export const ToyRobotProvider = ({ config, children }: IUseToyRobotProviderProps
         ? Direction.EAST
         : Direction.SOUTH;
 
-    setData({ ...data, direction: newDirection });
+    const newRotate = data.rotate - 90;
+
+    setData({ ...data, direction: newDirection, rotate: newRotate });
   };
 
   const turnRight = () => {
@@ -78,7 +88,9 @@ export const ToyRobotProvider = ({ config, children }: IUseToyRobotProviderProps
         ? Direction.WEST
         : Direction.NORTH;
 
-    setData({ ...data, direction: newDirection });
+    const newRotate = data.rotate + 90;
+
+    setData({ ...data, direction: newDirection, rotate: newRotate });
   };
 
   const moveForward = () => {
@@ -119,7 +131,7 @@ export const ToyRobotProvider = ({ config, children }: IUseToyRobotProviderProps
       return;
     }
 
-    setData({ x, y, direction });
+    setData({ x, y, direction, rotate: directionRotate[direction] });
   };
 
   return (
