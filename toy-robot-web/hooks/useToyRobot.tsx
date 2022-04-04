@@ -14,6 +14,8 @@ export interface DataRobot {
 }
 
 interface IUseToyRobot {
+  areaWidth: number;
+  areaHeight: number;
   data: null | DataRobot;
   turnLeft: () => void;
   turnRight: () => void;
@@ -135,6 +137,8 @@ export const ToyRobotProvider = ({ config, children }: IUseToyRobotProviderProps
         moveForward,
         place,
         data,
+        areaHeight: config.areaHeight,
+        areaWidth: config.areaWidth,
       }}>
       {children}
     </ToyRobotContext.Provider>

@@ -4,16 +4,29 @@ import {
   NumberInputStepper,
   NumberIncrementStepper,
   NumberDecrementStepper,
+  FormControl,
 } from '@chakra-ui/react';
+import { useField } from 'formik';
 
-export const NumberInput = () => {
+interface NumberInputProps {
+  id: string;
+  isRequired?: boolean;
+  max?: number;
+  min?: number;
+}
+
+export const NumberInput = ({ id, isRequired, max, min }: NumberInputProps) => {
+  const [field] = useField(id);
+
   return (
-    <ChakraNumberInput w='20'>
-      <NumberInputField />
-      <NumberInputStepper>
-        <NumberIncrementStepper />
-        <NumberDecrementStepper />
-      </NumberInputStepper>
-    </ChakraNumberInput>
+    <FormControl isRequired={isRequired}>
+      <ChakraNumberInput w='20' max={max} min={min}>
+        <NumberInputField id={id} {...field} />
+        <NumberInputStepper>
+          <NumberIncrementStepper />
+          <NumberDecrementStepper />
+        </NumberInputStepper>
+      </ChakraNumberInput>
+    </FormControl>
   );
 };

@@ -1,11 +1,23 @@
-import { Select } from '@chakra-ui/react';
+import { FormControl, Select } from '@chakra-ui/react';
+import { Field, useField } from 'formik';
+import { Direction } from '../hooks/useToyRobot';
 
-export const DirectionSelect = () => {
+interface DirectionSelectProps {
+  id: string;
+  isRequired?: boolean;
+}
+
+export const DirectionSelect = ({ id, isRequired }: DirectionSelectProps) => {
+  const [field] = useField(id);
+
   return (
-    <Select placeholder='direction' w='90%'>
-      <option value='option1'>Option 1</option>
-      <option value='option2'>Option 2</option>
-      <option value='option3'>Option 3</option>
-    </Select>
+    <FormControl isRequired={isRequired}>
+      <Select placeholder='--' w='90%' id={id} {...field}>
+        <option value={Direction.EAST}>{Direction.EAST}</option>
+        <option value={Direction.NORTH}>{Direction.NORTH}</option>
+        <option value={Direction.SOUTH}>{Direction.SOUTH}</option>
+        <option value={Direction.WEST}>{Direction.WEST}</option>
+      </Select>
+    </FormControl>
   );
 };

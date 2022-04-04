@@ -15,7 +15,9 @@ export const Grid = ({ numCols, numRows, renderCell }: GridProps) => {
   return (
     <ChakraGrid templateColumns={`repeat(${numCols}, 1fr)`}>
       {gridArray.map(({ numRow, numCol }, index) => (
-        <React.Fragment key={numCol + numRow + index}>{renderCell(numRow, numCol)}</React.Fragment>
+        <React.Fragment key={String(numCol) + String(numRow) + String(index)}>
+          {renderCell(numRow, numCol)}
+        </React.Fragment>
       ))}
     </ChakraGrid>
   );
