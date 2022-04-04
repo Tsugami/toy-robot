@@ -1,4 +1,4 @@
-import { Button, Flex, Spacer } from '@chakra-ui/react';
+import { Button, Flex } from '@chakra-ui/react';
 import { Form, FormikProvider, useFormik } from 'formik';
 import { Direction, useToyRobot } from '../hooks/useToyRobot';
 import { DirectionSelect } from './DirectionSelect';
@@ -6,14 +6,14 @@ import { NumberInput } from './NumberInput';
 import * as Yup from 'yup';
 
 export const PlaceCommand = () => {
-  const { areaHeight, areaWidth } = useToyRobot();
+  const { areaHeight, areaWidth, place } = useToyRobot();
   const formik = useFormik({
     initialValues: {
       x: '',
       y: '',
       direction: '',
     },
-    onSubmit: (values) => console.log(values),
+    onSubmit: (values) => place(Number(values.x), Number(values.y), values.direction as Direction),
     validationSchema: makeSchema(areaWidth, areaHeight),
   });
 

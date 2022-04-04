@@ -1,4 +1,4 @@
-import { DataRobot, useToyRobot } from '../hooks/useToyRobot';
+import { useToyRobot } from '../hooks/useToyRobot';
 
 import { GridItem as ChakraGridItem } from '@chakra-ui/react';
 import { useMemo } from 'react';
@@ -12,7 +12,10 @@ interface GridItemProps {
 export const GridItem = ({ row, col }: GridItemProps) => {
   const { data } = useToyRobot();
   const isPrimaryColor = useMemo(() => (row % 2 === 0 ? col % 2 === 0 : col % 2 !== 0), [row, col]);
-  const isRobot = useMemo(() => data?.x === col && data?.y === row, [data, col, row]);
+  const isRobot = useMemo(
+    () => Number(data?.x) === Number(col) && Number(data?.y) === Number(row),
+    [data, col, row],
+  );
 
   return (
     <ChakraGridItem
