@@ -35,8 +35,8 @@ export const PlaceCommand = () => {
 
 const makeSchema = (maxX: number, maxY: number) =>
   Yup.object().shape({
-    x: Yup.number().min(0).required(),
-    y: Yup.number().min(0).required(),
+    x: Yup.number().required(),
+    y: Yup.number().required(),
     direction: Yup.string()
       .required()
       .oneOf([Direction.EAST, Direction.NORTH, Direction.SOUTH, Direction.WEST]),
