@@ -5,17 +5,20 @@ import { Grid } from '../components/Grid';
 import { GridItem } from '../components/GridItem';
 import { RobotController } from '../components/RobotController';
 import { ToyRobotProvider } from '../hooks/useToyRobot';
+import { useToyRobotErrorToast } from '../hooks/useToyRobotErrorToast';
 
 const AREA_WIDTH = 5;
 const AREA_HEIGHT = 5;
 
 const Home: NextPage = () => {
+  const toast = useToyRobotErrorToast();
+
   return (
     <ToyRobotProvider
       config={{
         areaHeight: AREA_HEIGHT,
         areaWidth: AREA_WIDTH,
-        onError: (error) => console.log('error', error),
+        onError: toast,
       }}>
       <Container>
         <RobotController />

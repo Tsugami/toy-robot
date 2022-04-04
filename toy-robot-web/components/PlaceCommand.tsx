@@ -22,8 +22,8 @@ export const PlaceCommand = () => {
       <Form>
         <Flex flexDirection='column' m='3'>
           <Flex gap='3' mb='2'>
-            <NumberInput id='x' isRequired max={areaWidth} min={0} />
-            <NumberInput id='y' isRequired max={areaHeight} min={0} />
+            <NumberInput id='x' isRequired min={0} />
+            <NumberInput id='y' isRequired min={0} />
             <DirectionSelect id='direction' isRequired />
           </Flex>
           <Button type='submit'>PLACE</Button>
@@ -35,8 +35,8 @@ export const PlaceCommand = () => {
 
 const makeSchema = (maxX: number, maxY: number) =>
   Yup.object().shape({
-    x: Yup.number().min(0).max(maxX).required(),
-    y: Yup.number().min(0).max(maxY).required(),
+    x: Yup.number().min(0).required(),
+    y: Yup.number().min(0).required(),
     direction: Yup.string()
       .required()
       .oneOf([Direction.EAST, Direction.NORTH, Direction.SOUTH, Direction.WEST]),

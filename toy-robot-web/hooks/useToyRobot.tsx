@@ -23,7 +23,7 @@ interface IUseToyRobot {
   place: (x: number, y: number, direction: Direction) => void;
 }
 
-enum IUseToyRobotError {
+export enum IUseToyRobotError {
   INVALID_POSITION,
   INVALID_MOVIMENT,
   ROBOT_NOT_PLACED,
@@ -43,14 +43,7 @@ interface IUseToyRobotProviderProps {
 const ToyRobotContext = createContext<IUseToyRobot>({} as IUseToyRobot);
 
 export const ToyRobotProvider = ({ config, children }: IUseToyRobotProviderProps): JSX.Element => {
-  const [data, setData] = useState<DataRobot | null>(
-    // TEMPORATIO
-    {
-      direction: Direction.NORTH,
-      x: 0,
-      y: 0,
-    },
-  );
+  const [data, setData] = useState<DataRobot | null>(null);
 
   const turnLeft = () => {
     if (!data) {
