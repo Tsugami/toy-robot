@@ -104,13 +104,13 @@ export const ToyRobotProvider = ({ config, children }: IUseToyRobotProviderProps
 
     switch (data.direction) {
       case Direction.NORTH:
-        newY++;
+        newY--;
         break;
       case Direction.EAST:
         newX++;
         break;
       case Direction.SOUTH:
-        newY--;
+        newY++;
         break;
       case Direction.WEST:
         newX--;
