@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+      "outDir": "build",
+      "module": "CommonJS",
+      "lib": ["ESNext", "ES2020"],
+      "esModuleInterop": true,
+      "moduleResolution": "node",
+      "rootDir": "./src",
+      "target": "ES2019",
+      "noEmit": false,
+      "importHelpers": true
+    },
+    "include": ["src/**/*.ts"],
+    "exclude": ["src/**/*.test.ts", "src/**/*.spec.ts", "src/**/__tests__/**/*", "src/modules/*/fixture/*", "test/**/*"]
+  }
